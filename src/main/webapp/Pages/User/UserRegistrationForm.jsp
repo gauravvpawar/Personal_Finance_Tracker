@@ -107,8 +107,8 @@ input:focus {
     </div>
 
     <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="text" id="confirmPassword" name="confirmPassword" required>
+        <label for="cnfPassword">Confirm Password</label>
+        <input type="text" id="cnfPassword" name="cnfPassword" required>
     </div>
 
     <button type="submit" class="btn-submit">Register</button>

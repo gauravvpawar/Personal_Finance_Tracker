@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-    /* ------------------------------
-   Global Styles
------------------------------- */
 * {
     margin: 0;
     padding: 0;
@@ -30,9 +30,6 @@ body {
     margin: auto;
 }
 
-/* ------------------------------
-   Navbar
------------------------------- */
 .navbar {
     background: #1a73e8;
     padding: 15px 0;
@@ -80,9 +77,6 @@ body {
     border-radius: 5px;
 }
 
-/* ------------------------------
-   Hero Section
------------------------------- */
 .hero {
     background: linear-gradient(to right, #1a73e8, #4285f4);
     color: white;
@@ -128,9 +122,6 @@ body {
     background: #063ea2;
 }
 
-/* ------------------------------
-   Features Section
------------------------------- */
 .features {
     padding: 80px 0;
     text-align: center;
@@ -215,7 +206,7 @@ footer p {
             </div>
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="login.jsp">Login</a></li>
+                <li><a href="Pages/User/UserLoginForm.jsp">Login</a></li>
                 <li><a href="Pages/User/UserRegistrationForm.jsp">Register</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#about">About</a></li>
@@ -228,7 +219,7 @@ footer p {
             <h1>Take Control of Your Finances</h1>
             <p>Track expenses, set budgets, and achieve your financial goals with our easy-to-use personal finance tracker.</p>
             <a href="register.jsp" class="btn btn-primary">Get Started Free</a>
-            <a href="login.jsp" class="btn btn-secondary">Login</a>
+            <a href="Pages/User/UserLoginForm.jsp" class="btn btn-secondary">Login</a>
         </div>
     </section>
 

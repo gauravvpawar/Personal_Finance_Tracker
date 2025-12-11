@@ -16,11 +16,16 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/person
 
 PreparedStatement ps = con.prepareStatement("insert into users(name , email , password , cnfPassword) values('"+name+"' , '"+email+"' , '"+password+"' , '"+cnfPassword+"') ");
 
-ps.execute();
-
+if(ps.executeUpdate() > 0)
+{
 out.println("<script>");
 out.println("alert('Registration successfull')");
-out.println("window.location.href =  '../index.html'");
+out.println("window.location.href =  '../index.jsp'");
 out.println("</script>");
-
+}else{
+	out.println("<script>");
+	out.println("alert('Registration Failure ! Try Again')");
+	out.println("window.location.href =  '../index.jsp'");
+	out.println("</script>");
+}
 %>
