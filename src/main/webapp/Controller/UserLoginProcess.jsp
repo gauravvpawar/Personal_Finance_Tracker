@@ -21,6 +21,10 @@ if(rs.next())
 {
 int id = rs.getInt(1);
 
+HttpSession hs = request.getSession();
+hs.setAttribute("email", email);
+
+
 	out.println("<script>");
 	out.println("alert('Login Successfull')");
 	out.println("window.location.href = '../Pages/User/UserDashBoard.jsp?id="+ id +  "' ; ");
@@ -28,7 +32,7 @@ int id = rs.getInt(1);
 }else{
 	out.println("<script>");
 	out.println("alert('Login failure')");
-	out.println("window.location.href = '../index.html' ");
+	out.println("window.location.href = '../index.jsp' ");
 	out.println("</script>");
 }
 

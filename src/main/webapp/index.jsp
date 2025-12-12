@@ -218,7 +218,7 @@ footer p {
         <div class="container">
             <h1>Take Control of Your Finances</h1>
             <p>Track expenses, set budgets, and achieve your financial goals with our easy-to-use personal finance tracker.</p>
-            <a href="register.jsp" class="btn btn-primary">Get Started Free</a>
+            <a href="Pages/User/UserRegistrationForm.jsp" class="btn btn-primary">Get Started Free</a>
             <a href="Pages/User/UserLoginForm.jsp" class="btn btn-secondary">Login</a>
         </div>
     </section>
