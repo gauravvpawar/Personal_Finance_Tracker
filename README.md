@@ -140,19 +140,25 @@ Personal_Finance_Tracker/
 
  ## Screenshots
 
- ### Home Page
+### Authentication
 
- ### Register Page
+| Register | Login |
+|---|---|
+| ![Register Page](ScreenShots/RegisterPage.png) | ![Login Page](ScreenShots/LoginPage.png) |
 
- ### Login Page
+| Forgot Password | Update Password |
+|---|---|
+| ![Forgot Password](ScreenShots/ForgotPasswordPage.png) | ![Update Password](ScreenShots/UpdatePasswordPage.png) |
 
- ### Forgot Password
+### Application
 
- ### Update Password
+| Home Page | User Dashboard |
+|---|---|
+| ![Home Page](ScreenShots/MainPage.png) | ![User Dashboard](ScreenShots/UserDashboard.png) |
 
- ### User Dashboard
+### Profile
 
- ### Update Profile
+![Update Profile](ScreenShots/UserUpdateData.png)
 
  ## How to Run
 
