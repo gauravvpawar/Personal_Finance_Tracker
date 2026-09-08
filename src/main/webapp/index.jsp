@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,6 +201,20 @@ footer p {
     </style>
 </head>
 <body>
+
+<%
+    String message = (String) request.getAttribute("message");
+
+    if (message != null) {
+%>
+
+<script>
+    alert("<%= message %>");
+</script>
+
+<%
+    }
+%>
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -206,8 +223,8 @@ footer p {
             </div>
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="Pages/User/UserLoginForm.jsp">Login</a></li>
-                <li><a href="Pages/User/UserRegistrationForm.jsp">Register</a></li>
+                <li><a href="Pages/UserLoginForm.jsp">Login</a></li>
+                <li><a href="Pages/UserRegistrationForm.jsp">Register</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
@@ -253,8 +270,13 @@ footer p {
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Personal Finance Tracker. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> Personal Finance Tracker. All rights reserved.</p>
         </div>
     </footer>
+    
+    
+<script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

@@ -1,16 +1,19 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   <%@page import="java.sql.*" %>
+
+<%@ page import="java.sql.*"%>
+<%@ page import="com.finance.model.User"%>
+
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>User Profile</title>
-</head>
 
 <style>
-   /* MAIN LAYOUT */
+
 body {
     font-family: Poppins, Arial, sans-serif;
     background: #f0f2f5;
@@ -21,13 +24,11 @@ body {
     align-items: center;
 }
 
-/* WRAPPER FOR BACK BUTTON + FORM */
-.container {
+.profile-container {
     width: 420px;
     position: relative;
 }
 
-/* BACK BUTTON */
 .btn-back {
     padding: 8px 18px;
     font-size: 14px;
@@ -45,17 +46,16 @@ body {
     background: #5a6268;
 }
 
-/* FORM CARD */
 .auth-form {
     background: #ffffff;
     padding: 30px 35px;
     border-radius: 12px;
-    width: 100%;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 420px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease;
 }
 
-/* HEADINGS */
 .auth-form h2 {
     text-align: center;
     margin-bottom: 25px;
@@ -64,7 +64,6 @@ body {
     font-weight: 700;
 }
 
-/* FORM ELEMENTS */
 .form-group, .dob {
     margin-bottom: 18px;
     display: flex;
@@ -81,11 +80,13 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="date"] {
+    width: 300px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
     transition: 0.3s;
+    box-sizing: border-box;
 }
 
 input:focus {
@@ -94,7 +95,6 @@ input:focus {
     outline: none;
 }
 
-/* SUBMIT BUTTON */
 .btn-submit {
     width: 100%;
     padding: 12px;
@@ -113,13 +113,18 @@ input:focus {
     background: #3b5cc4;
 }
 
-/* ANIMATION */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* GENDER */
 .gender-options {
     display: flex;
     gap: 18px;
@@ -144,85 +149,113 @@ input:focus {
 
 </style>
 
+</head>
+
 <body>
 
 <%
+    User user = (User) request.getAttribute("user");
 
-int id = Integer.parseInt(request.getParameter("id"));
-
-Class.forName("com.mysql.cj.jdbc.Driver");
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/personal_finance_tracker" ,"root", "gaurav@123");
-
-PreparedStatement ps = con.prepareStatement("select * from users where uid = '"+id+"' ");
-ResultSet rs =  ps.executeQuery();
-
-
-if(!rs.next())
-{
-	out.println("<script>");
-	out.println("alert('Something went wrong')");
-	out.println("<script>");
-}
-
+    if (user == null) {
+        response.sendRedirect(
+            request.getContextPath() + "/index.jsp"
+        );
+        return;
+    }
 %>
 
-<div class="container">
+<div class="profile-container">
 
-    <!-- BACK BUTTON -->
-    <button type="button" class="btn-back" onclick="Back()">← Back</button>
+    <button type="button"
+            class="btn-back"
+            onclick="history.back()">
+        ← Back
+    </button>
 
-    <form action="<%= request.getContextPath() %>/Controller/UserUpdateDataProcess.jsp"
+    <form action="<%= request.getContextPath() %>/update-profile"
           method="POST"
           class="auth-form">
 
         <h2>Update Profile</h2>
 
-        <input type="hidden" name="id" value="<%= rs.getInt(1) %>">
-
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" value="<%= rs.getString(2) %>" required>
+            <input type="text"
+                   name="name"
+                   value="<%= user.getName() %>"
+                   required>
         </div>
 
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" readonly value="<%= rs.getString(3) %>" required>
+            <input type="email"
+                   value="<%= user.getEmail() %>"
+                   readonly>
         </div>
 
         <div class="form-group">
             <label>Password</label>
-            <input type="text" name="password" value="<%= rs.getString(4) %>" required>
+            <input type="text"
+                   name="password"
+                   value="<%= user.getPassword() %>"
+                   required>
         </div>
 
         <div class="form-group">
             <label>Confirm Password</label>
-            <input type="text" name="cnfPassword" value="<%= rs.getString(5) %>" required>
+            <input type="text"
+                   name="cnfPassword"
+                   value="<%= user.getCnfPassword() %>"
+                   required>
         </div>
 
         <div class="dob">
             <label>Date of Birth</label>
-            <input type="date" name="dob" value="<%= rs.getString(6) != null ? rs.getString(7) : "" %>">
+            <input type="date"
+                   name="dob"
+                   value="<%= user.getDob() != null ? user.getDob() : "" %>">
         </div>
 
         <label>Gender</label>
+
         <div class="gender-options">
-            <label><input type="radio" name="gender" value="Male"   <%= "Male".equals(rs.getString(8)) ? "checked" : "" %>> Male</label>
-            <label><input type="radio" name="gender" value="Female" <%= "Female".equals(rs.getString(8)) ? "checked" : "" %>> Female</label>
-            <label><input type="radio" name="gender" value="Other"  <%= "Other".equals(rs.getString(8)) ? "checked" : "" %>> Other</label>
+
+            <label>
+                <input type="radio"
+                       name="gender"
+                       value="Male"
+                       <%= "Male".equals(user.getGender()) ? "checked" : "" %>>
+                Male
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="gender"
+                       value="Female"
+                       <%= "Female".equals(user.getGender()) ? "checked" : "" %>>
+                Female
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="gender"
+                       value="Other"
+                       <%= "Other".equals(user.getGender()) ? "checked" : "" %>>
+                Other
+            </label>
+
         </div>
 
-        <button type="submit" class="btn-submit">Update Data</button>
+        <button type="submit"
+                class="btn-submit">
+            Update Data
+        </button>
+
     </form>
 
 </div>
 
-<script>
-function Back() {
-    history.back();
-}
-</script>
-
-
-
 </body>
+
 </html>
+
